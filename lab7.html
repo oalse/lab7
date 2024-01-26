@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Validation</title>
+  <style>
+    .error {
+      background-color: red;
+      color: rgb(0, 0, 0);
+    }
+    #name{
+        width: 300px;
+        margin-left: 55px;
+    }
+    #email{
+        width: 300px;
+        margin-left: 55px;
+    }
+    #phone{
+        width: 300px;
+    }
+    #level{
+        margin-left: 55px;
+    }
+    #submit{
+        margin-left: 100px;
+    }
+  </style>
+</head>
+<body>
+
+    <h1>Form Entry</h1><br><br>
+
+  <form id="myForm" onsubmit="return validateForm()">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" oninput="validateName()">
+    <br>
+
+    <label for="email">Email:</label>
+    <input type="text" id="email" name="email" oninput="validateEmail()">
+    <br>
+
+    <label for="phone">Phone number:</label>
+    <input type="text" id="phone" name="phone" oninput="validatePhone()">
+    <br>
+
+    <label for="level">Level:</label>
+    <select id="level" name="level" onchange="validateLevel()">
+      <option value="">Select Level</option>
+      <option value="beginner">Beginner</option>
+      <option value="intermediate">Intermediate</option>
+      <option value="advanced">Advanced</option>
+    </select>
+    <br>
+
+    <input type="submit" id="submit" value="Submit">
+  </form>
+
+  <script>
+    
+    function validateName() {
+      const nameField = document.getElementById("name");
+      if (nameField.value.length < 2) {
+        nameField.classList.add("error");
+      } else {
+        nameField.classList.remove("error");
+      }
+    }
+
+    function validateEmail() {
+      const emailField = document.getElementById("email");
+      if (emailField.value.length < 6) {
+        emailField.classList.add("error");
+      } else {
+        emailField.classList.remove("error");
+      }
+    }
+
+    function validatePhone() {
+      const phoneField = document.getElementById("phone");
+      if (phoneField.value.length < 8) {
+        phoneField.classList.add("error");
+      } else {
+        phoneField.classList.remove("error");
+      }
+    }
+
+    function validateLevel() {
+      const levelField = document.getElementById("level");
+      if (levelField.value === "") {
+        levelField.classList.add("error");
+      } else {
+        levelField.classList.remove("error");
+      }
+    }
+
+    function validateForm() {
+      validateName();
+      validateEmail();
+      validatePhone();
+      validateLevel();
+
+
+      const errorFields = document.querySelectorAll(".error");
+      if (errorFields.length > 0) {
+        alert("Please fix the errors in the form.");
+        return false;
+      } else {
+        alert("Thank you for submitting the form!");
+
+        return true;
+      }
+    }
+  </script>
+
+</body>
+</html>
